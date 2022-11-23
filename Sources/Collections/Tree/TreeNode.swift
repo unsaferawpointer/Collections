@@ -43,6 +43,14 @@ public extension TreeNode {
 		return transform(self, action: action)
 	}
 
+	/// Filter descendants of the node
+	///
+	/// - Parameters:
+	///    - predicate: Predicate to filter descendants
+	func filter(predicate: (Element) -> Bool) {
+		filter(self, predicate: predicate)
+	}
+
 	/// Returns node by index path
 	///
 	/// - Parameters:
@@ -117,6 +125,15 @@ private extension TreeNode {
 			return node
 		}
 		return search(in: node.children[offset], indexPath: indexPath.dropFirst())
+	}
+
+	func filter(_ node: TreeNode<Element>, predicate: (Element) -> Bool) {
+		node.children.removeAll {
+			!predicate($0.value)
+		}
+		for child in node.children {
+			filter(child, predicate: predicate)
+		}
 	}
 
 }

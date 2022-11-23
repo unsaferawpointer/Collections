@@ -107,6 +107,22 @@ extension TreeNodeTests {
 		}
 		XCTAssertEqual(stack, ["_", "_0", "_00", "_01", "_1"])
 	}
+
+	func testFilter() throws {
+		// Arrange
+		var stack: [String] = []
+
+		// Act
+		sut.filter {
+			$0.hasPrefix("0")
+		}
+
+		// Assert
+		sut.enumerateValues { value, indexPath in
+			stack.append(value)
+		}
+		XCTAssertEqual(stack, ["", "0", "00", "01"])
+	}
 }
 
 // MARK: - Helpers
