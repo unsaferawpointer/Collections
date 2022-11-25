@@ -83,6 +83,7 @@ extension TreeNode where Element: Identifiable {
 		enumerate(self, indexPath: origin, parent: nil, visit: action)
 	}
 
+	/// Enumerate all nodes in Depth-First-Traversal order.
 	func enumerate(_ node: TreeNode,
 				   indexPath: IndexPath,
 				   parent: AnyHashable?,
